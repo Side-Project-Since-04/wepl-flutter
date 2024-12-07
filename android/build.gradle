@@ -1,3 +1,23 @@
+// keystore 정보 로드
+ext.keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+    println "key.properties file found: ${keystorePropertiesFile}"
+} else {
+    println "key.properties file not found: ${keystorePropertiesFile}"
+}
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:8.3.1"
+    }
+}
+
 allprojects {
     repositories {
         google()
@@ -15,4 +35,4 @@ subprojects {
 
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
-}
+} 
